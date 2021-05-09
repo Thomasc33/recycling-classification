@@ -13,11 +13,12 @@ function App() {
         async function callPost() {
             let im = webcamRef.current.getScreenshot()
             let formData = new FormData()
-            if (!im) { console.log(im); return }
+            if (!im) return
             var block = im.split(";");
             var contentType = block[0].split(":")[1];
             var realData = block[1].split(",")[1];
             var blob = b64toBlob(realData, contentType);
+            if (!blob) return
             formData.append('image', blob)
             const response = await axios({
                 method: 'post',
@@ -30,12 +31,12 @@ function App() {
             }).catch(er => {
                 console.log('error: ', er)
             })
+            if (!response || !response.data) return console.log('no data')
             const data = response.data
             console.log(data)
-            if (!data) return
             setData(data);
         }
-        setInterval(callPost, 2000)
+        setInterval(callPost, 3000)
     }, [])
     return (
         <>
