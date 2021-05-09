@@ -14,7 +14,7 @@ function App() {
             let formData = new FormData()
             let image = new Image()
             image.src = im
-            formData.append(image)
+            formData.append('image', image)
             const response = await axios.post('https://recycling-classification.onrender.com/predict', formData, {
                 mode: 'cors',
                 headers: {
