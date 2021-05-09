@@ -11,14 +11,18 @@ function App() {
     useEffect(() => {
         async function callPost() {
             let im = webcamRef.current.getScreenshot()
-            console.log(im)
-            const response = await axios.post('url', { im }, {
+            let formData = new FormData()
+            let image = new Image()
+            image.src = im
+            formData.append(image)
+            const response = await axios.post('https://recycling-classification.onrender.com/predict', formData, {
                 mode: 'cors',
                 headers: {
                     'Access-Control-Allow-Origin': '*'
                 }
             })
             const data = await response.json();
+            console.log(data)
             setData(data);
         }
         callPost()
