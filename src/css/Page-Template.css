@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600,700|Work+Sans:300,400,700,900");
+.App {
+  text-align: center;
+  overflow: hidden;
+  padding: 0px;
+  background-color: #2C2F33
+}
+
+.Content {
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+  padding: 0px;
+}
+
+.Header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0px;
+}
+
+.Header ul {
+  margin: auto;
+  padding: 0;
+  list-style: none;
+  display: table;
+  width: auto;
+  text-align: center;
+  float: right;
+}
+
+.Header li {
+  display: table-cell;
+  position: relative;
+  padding: 10px 0;
+}
+
+.Header a {
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.2em;
+  display: inline-block;
+  padding: 15px 25px;
+  position: relative;
+}
+
+.Header a:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: #fff;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+
+.Header a:hover:after {
+  width: 100%;
+  left: 0;
+}
+
+.Header a.active {
+  color: #a778ff;
+}
+
+.Header a.active:after {
+  background: #a778ff;
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+  font-family: 'Montserrat', sans-serif;
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.body {
+  padding-bottom: 0px;
+  scrollbar-width: none;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  width: 100%
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+
+.dropDownHeader:hover .dropdown-content {
+  display: block;
+}

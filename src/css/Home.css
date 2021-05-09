@@ -1,0 +1,34 @@
+.Camera {
+    position:absolute;
+    left:15vw;
+    top:15vh;
+}
+
+@media only screen and (max-width: 800px) {
+    .ActiveBox {
+        width: 80%;
+        padding-bottom: 10px;
+        float: none;
+    }
+    .RunBox {
+        width: 80%;
+        padding-bottom: 10px;
+        float: none;
+    }
+    .afkText h2 {
+        color: #eeeeee;
+        text-align: left;
+        padding: 4px;
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .afkText h2 {
+        font-size: 18px;
+    }
+}
+
+* {
+    text-decoration: none;
+}
