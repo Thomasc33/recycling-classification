@@ -1,18 +1,28 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from fastai.basic_train import load_learner
-from fastai.vision import open_image
+from fastai.vision.all import load_learner, PILImage
+from pathlib import PurePosixPath
+import 
+import re
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 
+pattern = re.compile(r'\d{4}_(a\d\d)b\d\dc\d(d\d)(e\d)(f\d)g\dh\d\.jpg')
+def get_y(x):
+  y =  list(x for x in pattern.search(str(x)).groups())
+  return y
+
+
+
 # load the learner
-learn = load_learner(path='./models', file='trained_model.pkl')
+learn = load_learner('trained_model.pkl')
 classes = learn.data.classes
+
 
 
 def predict_single(img_file):
     'function to take image and return prediction'
-    pred, pred_idx, probs = learn.predict(open_image(img_file))
+    pred, pred_idx, probs = learn.predict(PILImage.create(img_file))
     return {
         'categories': [str(x) for x in pred],
         'probs': {c: round(float(probs[i]), 5) for (i, c) in enumerate(classes)}
