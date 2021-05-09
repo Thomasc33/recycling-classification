@@ -17,7 +17,7 @@ class PageTemplate extends React.Component {
                             <a className={this.props.highLight === "0" ? "active" : ""} href='/'>Try It!</a>
                         </li>
                         <li>
-                            <a className={this.props.highLight === "1" ? "active" : ""} href='stats'>About</a>
+                            <a className={this.props.highLight === "1" ? "active" : ""} href='about'>About</a>
                         </li>
                     </ul>
                 </div>
