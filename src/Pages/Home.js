@@ -50,9 +50,7 @@ function App() {
                     screenshotFormat="image/jpeg"
                 />
                 {data ?
-                    <>
-                        {data.categories.map(cls => <p>{niceLabels(cls)}</p>)}
-                    </>
+                    <> {data.categories.map(cls => <p>{niceLabels(cls)}</p>)} </>
                     :
                     <p>Data will appear shorlty...</p>
                 }
@@ -67,15 +65,40 @@ export default App;
 function niceLabels(cls) {
     if (cls.charAt(0) === 'a') {
         switch (cls) {
-            case 'a00': return 'Unknown'
-            case 'a01': return 'PET - polyethylene terephthalate'
-            case 'a02': return 'PE-HD - high-density polyethylene'
-            case 'a03': return 'PVC - polyvinyl chloride'
-            case 'a04': return 'PE-LD - low-density polyethylene'
-            case 'a05': return 'PP - polypropylene'
-            case 'a06': return 'PS - polystyrene'
-            case 'ao7': return 'Other'
-            default: return 'Unknown'
+            case 'a00': return 'Plastic Type: Unknown (0)'
+            case 'a01': return 'Plastic Type: PET - polyethylene terephthalate (1)'
+            case 'a02': return 'Plastic Type: PE-HD - high-density polyethylene (2)'
+            case 'a03': return 'Plastic Type: PVC - polyvinyl chloride (3)'
+            case 'a04': return 'Plastic Type: PE-LD - low-density polyethylene (4)'
+            case 'a05': return 'Plastic Type: PP - polypropylene (5)'
+            case 'a06': return 'Plastic Type: PS - polystyrene (6)'
+            case 'a07': return 'Plastic Type: Other (7)'
+            default: return 'Plastic Type: Unknown'
+        }
+    }
+    if (cls.charAt(0) === 'd') {
+        switch (cls) {
+            case 'd0': return 'Deformation: None'
+            case 'd1': return 'Deformation: Small Amounts'
+            case 'd2': return 'Deformation: Medium Amounts'
+            case 'd3': return 'Deformation: Large Amounts'
+            default: return 'Deformation: Unknown'
+        }
+    }
+    if (cls.charAt(0) === 'e') {
+        switch (cls) {
+            case 'e0': return 'Cleanliness: Clean'
+            case 'e1': return 'Cleanliness: Small Dirt'
+            case 'e2': return 'Cleanliness: Medium Dirt'
+            case 'e3': return 'Cleanliness: High Dirt'
+            default: return 'Cleanliness: Unknown'
+        }
+    }
+    if (cls.charAt(0) === 'f') {
+        switch (cls) {
+            case 'f0': return 'Has A Screwing Lid: No'
+            case 'f1': return 'Has a Screwing Lid: Yes'
+            default: return 'Has a Screwing Lid: Unknown'
         }
     }
 }
