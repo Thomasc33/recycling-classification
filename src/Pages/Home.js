@@ -32,11 +32,11 @@ function App() {
             })
             const data = response.data
             console.log(data)
-            if(!data) return
+            if (!data) return
             setData(data);
         }
         setInterval(callPost, 2000)
-    })
+    }, [])
     return (
         <>
             <PageTemplate highLight="0" />
