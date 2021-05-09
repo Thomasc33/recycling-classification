@@ -13,12 +13,12 @@ function App() {
         async function callPost() {
             let im = webcamRef.current.getScreenshot()
             let formData = new FormData()
-            if (!im) return
+            if (!im) return setTimeout(callPost, 1000)
             var block = im.split(";");
             var contentType = block[0].split(":")[1];
             var realData = block[1].split(",")[1];
             var blob = b64toBlob(realData, contentType);
-            if (!blob) return
+            if (!blob) return setTimeout(callPost, 1000)
             formData.append('image', blob)
             const response = await axios({
                 method: 'post',
@@ -31,12 +31,14 @@ function App() {
             }).catch(er => {
                 console.log('error: ', er)
             })
-            if (!response || !response.data) return console.log('no data')
+            if (!response || !response.data) return setTimeout(callPost, 1000)
             const data = response.data
             console.log(data)
             setData(data);
+            setTimeout(callPost, 1000)
         }
-        setInterval(callPost, 3000)
+        callPost()
+        //setInterval(callPost, 3000)
     }, [])
     return (
         <>
@@ -49,10 +51,7 @@ function App() {
                 />
                 {data ?
                     <>
-                        <p>Plastic Type: {data.type}</p>
-                        <p>Deformed: {data.deformed ? 'Yes' : 'No'}</p>
-                        <p>Lid On: {data.lid ? 'Yes' : 'No'}</p>
-                        <p>Dirty: {data.dirty ? 'Yes' : 'No'}</p>
+                        {data.categories.map(cls => <p>{niceLabels(cls)}</p>)}
                     </>
                     :
                     <p>Data will appear shorlty...</p>
@@ -65,6 +64,21 @@ function App() {
 
 export default App;
 
+function niceLabels(cls) {
+    if (cls.charAt(0) === 'a') {
+        switch (cls) {
+            case 'a00': return 'Unknown'
+            case 'a01': return 'PET - polyethylene terephthalate'
+            case 'a02': return 'PE-HD - high-density polyethylene'
+            case 'a03': return 'PVC - polyvinyl chloride'
+            case 'a04': return 'PE-LD - low-density polyethylene'
+            case 'a05': return 'PP - polypropylene'
+            case 'a06': return 'PS - polystyrene'
+            case 'ao7': return 'Other'
+            default: return 'Unknown'
+        }
+    }
+}
 
 function b64toBlob(b64Data, contentType, sliceSize) {
     contentType = contentType || '';
