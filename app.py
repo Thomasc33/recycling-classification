@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from fastai.vision.all import load_learner, PILImage
 from pathlib import PurePosixPath
-import 
 import re
 app = Flask(__name__)
 CORS(app, support_credentials=True)
