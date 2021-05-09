@@ -22,8 +22,8 @@ def predict_single(img_file):
     'function to take image and return prediction'
     pred, pred_idx, probs = learn.predict(PILImage.create(img_file))
     return {
-        'categories': [str(x) for x in pred],
-        'probs': {c: round(float(probs[i]), 5) for (i, c) in enumerate(classes)}
+        'categories': [str(x) for x in pred]#,
+        #'probs': {c: round(float(probs[i]), 5) for (i, c) in enumerate(classes)}
     }
 
 # route for prediction
