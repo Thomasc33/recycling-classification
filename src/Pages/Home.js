@@ -22,7 +22,7 @@ function App() {
             formData.append('image', blob)
             const response = await axios({
                 method: 'post',
-                url: 'http://a.bluebounty.tech:9000/predict',
+                url: 'https://mc.bluebounty.tech:9000/predict',
                 mode: 'cors',
                 headers: {
                     'Access-Control-Allow-Origin': '*'

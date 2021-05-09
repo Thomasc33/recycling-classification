@@ -4,6 +4,11 @@
     top:15vh;
 }
 
+.Camera p {
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+}
+
 @media only screen and (max-width: 800px) {
     .ActiveBox {
         width: 80%;
