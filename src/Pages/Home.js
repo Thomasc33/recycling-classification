@@ -15,12 +15,20 @@ function App() {
             let image = new Image()
             image.src = im
             formData.append('image', image)
-            const response = await axios.post('https://recycling-classification.onrender.com/predict', formData, {
-                mode: 'cors',
+            const response = await axios({
+                method: "post",
+                url: "http://a.bluebounty.tech:9000/predict",
+                data: formData,
                 headers: {
-                    'Access-Control-Allow-Origin': '*'
-                }
+                    'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+                },
             })
+            // const response = await axios.post('http://a.bluebounty.tech:9000/predict', formData, {
+            //     mode: 'cors',
+            //     headers: {
+            //         'Access-Control-Allow-Origin': '*'
+            //     }
+            // })
             const data = await response.json();
             console.log(data)
             setData(data);
