@@ -38,6 +38,7 @@ function App() {
             }).catch(er => { })
 
             //return data
+            console.log(response)
             if (!response || !response.data) return setTimeout(callPost, 1000)
             const data = response.data
             console.log(JSON.stringify(data))
@@ -45,7 +46,6 @@ function App() {
             setTimeout(callPost, 1000)
         }
         callPost()
-        //setInterval(callPost, 3000)
     }, [])
     return (
         <>
@@ -63,57 +63,71 @@ function App() {
                     ref={webcamRef}
                     screenshotFormat="image/jpeg"
                 />
-                {data ?
-                    <> {data.categories.map(cls => <p>{niceLabels(cls)}</p>)} </>
-                    :
-                    <p>Data will appear shorlty...</p>}
             </div>
+            {data ?
+                <div className='predictionArea'>
+                    {Object.keys(data.categories).map(cls => niceLabels(cls, data.categories[cls]))}
+                </div>
+                :
+                <p>Data will appear shorlty...</p>}
         </>
     )
 }
 
 export default App;
 
-function niceLabels(cls) {
-    if (cls.length > 3) return `Similar To: ${toTitleCase(cls.replace('_', ' '))}`
-    if (cls.charAt(0) === 'a') {
+/**
+ * 
+ * @param {String} cls 
+ * @param {Number} prob 
+ * @returns {JSX}
+ */
+function niceLabels(cls, prob) {
+    let str = ''
+    if (cls.length > 3) str = `Similar To: ${toTitleCase(cls.replace('_', ' '))}`
+    if (cls.charAt(0) === `a`) {
         switch (cls.slice(-1)) {
-            case '0': return 'Plastic Type: Unknown (0)'
-            case '1': return 'Plastic Type: PET - polyethylene terephthalate (1)'
-            case '2': return 'Plastic Type: PE-HD - high-density polyethylene (2)'
-            case '3': return 'Plastic Type: PVC - polyvinyl chloride (3)'
-            case '4': return 'Plastic Type: PE-LD - low-density polyethylene (4)'
-            case '5': return 'Plastic Type: PP - polypropylene (5)'
-            case '6': return 'Plastic Type: PS - polystyrene (6)'
-            case '7': return 'Plastic Type: Other (7)'
-            default: return 'Plastic Type: Unknown'
+            case `0`: str = `Plastic Type: Unknown (0),`; break;
+            case `1`: str = `Plastic Type: PET - polyethylene terephthalate (1)`; break;
+            case `2`: str = `Plastic Type: PE-HD - high-density polyethylene (2)`; break;
+            case `3`: str = `Plastic Type: PVC - polyvinyl chloride (3)`; break;
+            case `4`: str = `Plastic Type: PE-LD - low-density polyethylene (4)`; break;
+            case `5`: str = `Plastic Type: PP - polypropylene (5)`; break;
+            case `6`: str = `Plastic Type: PS - polystyrene (6)`; break;
+            case `7`: str = `Plastic Type: Other (7)`; break;
+            default: str = `Plastic Type: Unknown`; break;
         }
     }
-    if (cls.charAt(0) === 'd') {
+    if (cls.charAt(0) === `d`) {
         switch (cls) {
-            case 'd0': return 'Deformation: None'
-            case 'd1': return 'Deformation: Small Amounts'
-            case 'd2': return 'Deformation: Medium Amounts'
-            case 'd3': return 'Deformation: Large Amounts'
-            default: return 'Deformation: Unknown'
+            case `d0`: str = `Deformation: None`; break;
+            case `d1`: str = `Deformation: Small Amounts`; break;
+            case `d2`: str = `Deformation: Medium Amounts`; break;
+            case `d3`: str = `Deformation: Large Amounts`; break;
+            default: str = `Deformation: Unknown`; break;
         }
     }
-    if (cls.charAt(0) === 'e') {
+    if (cls.charAt(0) === `e`) {
         switch (cls) {
-            case 'e0': return 'Cleanliness: Clean'
-            case 'e1': return 'Cleanliness: Small Dirt'
-            case 'e2': return 'Cleanliness: Medium Dirt'
-            case 'e3': return 'Cleanliness: High Dirt'
-            default: return 'Cleanliness: Unknown'
+            case `e0`: str = `Cleanliness: Clean`; break;
+            case `e1`: str = `Cleanliness: Small Dirt`; break;
+            case `e2`: str = `Cleanliness: Medium Dirt`; break;
+            case `e3`: str = `Cleanliness: High Dirt`; break;
+            default: str = `Cleanliness: Unknown`; break;
         }
     }
-    if (cls.charAt(0) === 'f') {
+    if (cls.charAt(0) === `f`) {
         switch (cls) {
-            case 'f0': return 'Has A Screwing Lid: No'
-            case 'f1': return 'Has a Screwing Lid: Yes'
-            default: return 'Has a Screwing Lid: Unknown'
+            case `f0`: str = `Has A Screwing Lid: No`; break;
+            case `f1`: str = `Has a Screwing Lid: Yes`; break;
+            default: str = `Has a Screwing Lid: Unknown`; break;
         }
     }
+    return (
+        <div style={{ background: `linear-gradient(90deg, ${'#8730d9'} 0%, ${blendColors('#8730d9', '#000000', .5)} ${(prob * 100).toFixed(5)}%, #000000 100%)`, margin: '7%', padding: '1rem', borderRadius: '3px' }}>
+            <p>{`Confidence: ${(prob * 100).toFixed(5)}%, ` + str}</p>
+        </div>
+    )
 }
 
 function b64toBlob(b64Data, contentType, sliceSize) {
@@ -144,4 +158,13 @@ function toTitleCase(str) {
     return str.replace(/\w\S*/g, function (txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
+}
+
+function blendColors(colorA, colorB, amount) {
+    const [rA, gA, bA] = colorA.match(/\w\w/g).map((c) => parseInt(c, 16));
+    const [rB, gB, bB] = colorB.match(/\w\w/g).map((c) => parseInt(c, 16));
+    const r = Math.round(rA + (rB - rA) * amount).toString(16).padStart(2, '0');
+    const g = Math.round(gA + (gB - gA) * amount).toString(16).padStart(2, '0');
+    const b = Math.round(bA + (bB - bA) * amount).toString(16).padStart(2, '0');
+    return '#' + r + g + b;
 }

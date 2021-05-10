@@ -1,7 +1,7 @@
 .Camera {
-    position:absolute;
-    left:15vw;
-    top:15vh;
+    position: absolute;
+    left: 10vw;
+    top: 15vh;
 }
 
 .Camera * {
@@ -19,4 +19,21 @@
 
 * {
     text-decoration: none;
+}
+
+.predictionArea {
+    position: absolute;
+    background-color: #23272add;
+    left: 10%;
+    bottom: 5px;
+    width: 80%;
+    height: 40%;
+    float: left;
+    border-radius: 5px;
+    overflow-y: scroll;
+}
+
+.predictionArea p {
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
 }
