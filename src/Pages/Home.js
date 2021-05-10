@@ -25,7 +25,7 @@ function App() {
             //Model selection
             let choice = document.getElementById('model')
             console.log(choice.value)
-            formData.append('model', choice)
+            formData.append('model', choice.value)
 
             //Post
             const response = await axios({
