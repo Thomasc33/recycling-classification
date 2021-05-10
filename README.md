@@ -1,12 +1,32 @@
-# Getting Started with Create React App
+# Recycling Classification Website
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+A live demo of this project is available [Here](https://recycling-classification.web.app).
+
+## Requirements
+
+* Node.js: [Link](https://nodejs.org/en/download/)
+* yarn: `npm install yarn`
+
+## Installation
+
+Clone/Download and run the following commands:
+
+### `yarn install`
+
+Using yarn to install
+
+### `npm install`
+
+Using npm to install
 
 ## Available Scripts
 
 In the project directory, you can run:
 
 ### `yarn start`
+### `npm run start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -14,12 +34,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `yarn build`
+### `npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -29,42 +45,33 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+# Recycling Classification Model API
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Works using a Flask REST API to receive POST requests
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Requirements
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* Developed on Python 3.9: [Link](https://www.python.org/downloads/)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Installation
 
-## Learn More
+`pip install -r requirements.txt`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Running
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Windows: `py app.py`
 
-### Code Splitting
+### Unix: `gunicorn app:app`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+# Model Training
+* Reference `training/train_duck.ipynb` and `training/train_wadaba.ipynb`
+* Add new data to `training/data/`
+* Incorporate new data, and run training
+* Export model to `modelname.pkl`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# Adding Model Website/Flask
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Add model name and ID to `src/Pages/Home.js`
+* Add conditional statement to `app.py` for new model id
+* Load Model in `app.py`, provide new predict function if something else was used
