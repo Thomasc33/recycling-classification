@@ -21,7 +21,7 @@ learn_wadaba = load_learner('wadaba.pkl')
 # define get_y of next model
 learn_duck = load_learner('duck.pkl')
 
-learn_wadabaplus = load_leaner('wadabaplus.pkl')
+learn_wadabaplus = load_learner('wadabaplus.pkl')
 
 def predict_single(img_file, learn):
     'function to take image and return prediction'
