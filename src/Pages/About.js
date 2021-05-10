@@ -14,7 +14,7 @@ function App() {
                 <div className="ProfileStatsBoxGroup">
                     <h2>Michael Phelps</h2>
                     <li>Research</li>
-                    <li>Development and Training of Model</li>
+                    <li>Development and Training of Wadaba/DuckDuckGo Models</li>
                     <li>Collection of Data</li>
                 </div>
                 <div className="ProfileStatsBoxGroup">
@@ -26,12 +26,13 @@ function App() {
                 <div className="ProfileStatsBoxGroup">
                     <h2>Junior Sangvacharakul</h2>
                     <li>Research</li>
-                    <li>Aided in Model Development</li>
+                    <li>Aided in Wadaba Model Development</li>
                 </div>
                 <div className="ProfileStatsBoxGroup">
                     <h2>Harrison Lee</h2>
                     <li>Research</li>
                     <li>Retrieved Access to WaDaBa Dataset</li>
+                    <li>Development and Training of Wadaba+ Model</li>
                     <li>Model Testing</li>
                 </div>
                 <div className="ProfileStatsBoxGroup">
