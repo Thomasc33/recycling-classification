@@ -11,6 +11,7 @@ function App() {
 
     useEffect(() => {
         async function callPost() {
+            //Image Logic
             let im = webcamRef.current.getScreenshot()
             let formData = new FormData()
             if (!im) return setTimeout(callPost, 1000)
@@ -20,6 +21,13 @@ function App() {
             var blob = b64toBlob(realData, contentType);
             if (!blob) return setTimeout(callPost, 1000)
             formData.append('image', blob)
+
+            //Model selection
+            let choice = document.getElementById('model')
+            console.log(choice.value)
+            formData.append('model', choice)
+
+            //Post
             const response = await axios({
                 method: 'post',
                 url: 'https://mc.bluebounty.tech:9000/predict',
@@ -31,6 +39,8 @@ function App() {
             }).catch(er => {
                 console.log('error: ', er)
             })
+
+            //return data
             if (!response || !response.data) return setTimeout(callPost, 1000)
             const data = response.data
             console.log(data)
@@ -42,6 +52,11 @@ function App() {
     }, [])
     return (
         <>
+            <label>Choose a model: </label>
+            <select className='modelSelect' id='model'>
+                <option value='wadaba'>WaDaBA</option>
+                <option value='duckduckgo'>DuckDuckGo</option>
+            </select>
             <PageTemplate highLight="0" />
             <div className='Camera'>
                 <Webcam
@@ -52,9 +67,7 @@ function App() {
                 {data ?
                     <> {data.categories.map(cls => <p>{niceLabels(cls)}</p>)} </>
                     :
-                    <p>Data will appear shorlty...</p>
-                }
-
+                    <p>Data will appear shorlty...</p>}
             </div>
         </>
     )

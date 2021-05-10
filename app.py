@@ -1,13 +1,13 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from fastai.vision.all import load_learner, PILImage
 from pathlib import PurePosixPath
 import re
 import pathlib
 temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
+pathlib.PosixPath = pathlib.PurePosixPath
 app = Flask(__name__)
-CORS(app, support_credentials=True)
+CORS(app)
 
 pattern = re.compile(r'\d{4}_(a\d\d)b\d\dc\d(d\d)(e\d)(f\d)g\dh\d\.jpg')
 def get_y(x):
@@ -15,10 +15,13 @@ def get_y(x):
   return y
 
 # load the learner
-learn = load_learner('trained_model.pkl')
+learn_wadaba = load_learner('wadaba.pkl')
 #classes = learn.data.classes
 
-def predict_single(img_file):
+# define get_y of next model
+learn_duck = load_learner('duck.pkl')
+
+def predict_single_wadaba(img_file, learn):
     'function to take image and return prediction'
     pred, pred_idx, probs = learn.predict(PILImage.create(img_file))
     return {
@@ -28,8 +31,14 @@ def predict_single(img_file):
 
 # route for prediction
 @app.route('/predict', methods=['POST'])
+@cross_origin()
 def predict():
-    return jsonify(predict_single(request.files['image']))
+    selected_model = request.form.get('model','wadaba')
+    if selected_model == 'wadaba':
+        return jsonify(predict_single(request.files['image'], learn_wadaba))  
+    elif selected_model == 'duckduckgo':
+        return jsonify(predict_single(request.files['image'], learn_duck))
+    
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host= '192.168.254.76', port=9000, debug=False, ssl_context=('cert.pem', 'key.pem'))
