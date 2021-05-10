@@ -21,6 +21,10 @@ Using yarn to install
 
 Using npm to install
 
+### API End point
+
+Change the url of the POST request inside of `src/Pages/Home.js`
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -43,11 +47,14 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
 # Recycling Classification Model API
 
 Works using a Flask REST API to receive POST requests
+
+## Changes to make
+Since the host for the demo website uses https, the model needed SSL certificates. If you are just running the website locally, make the following chanes:\
+* `app.run(host= '192.168.254.76', port=9000, debug=True, ssl_context=('cert.pem', 'key.pem'))`
+* change to `app.run()`
 
 ## Requirements
 
