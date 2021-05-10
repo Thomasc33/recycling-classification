@@ -21,6 +21,8 @@ learn_wadaba = load_learner('wadaba.pkl')
 # define get_y of next model
 learn_duck = load_learner('duck.pkl')
 
+learn_wadabaplus = load_leaner('wadabaplus.pkl')
+
 def predict_single(img_file, learn):
     'function to take image and return prediction'
     pred, pred_idx, probs = learn.predict(PILImage.create(img_file))
@@ -40,6 +42,8 @@ def predict():
     selected_model = request.form.get('model','wadaba')
     if selected_model == 'wadaba':
         return jsonify(predict_single(request.files['image'], learn_wadaba))  
+    if selected_model == 'wadabaplus':
+        return jsonify(predict_single(request.files['image'], learn_wadabaplus))  
     elif selected_model == 'duckduckgo':
         return jsonify(predict_single(request.files['image'], learn_duck))
     return "model not found", 400

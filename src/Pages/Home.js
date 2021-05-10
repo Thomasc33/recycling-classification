@@ -57,6 +57,7 @@ function App() {
                     <select id='model'>
                         <option value='duckduckgo'>DuckDuckGo</option>
                         <option value='wadaba'>WaDaBA</option>
+                        <option value='wadabaplus'>WaDaBA+</option>
                     </select>
                 </div>
                 <Webcam
