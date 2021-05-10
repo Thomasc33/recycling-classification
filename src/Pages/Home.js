@@ -76,16 +76,17 @@ function App() {
 export default App;
 
 function niceLabels(cls) {
+    if(cls.length > 3) return cls
     if (cls.charAt(0) === 'a') {
-        switch (cls) {
-            case 'a00': return 'Plastic Type: Unknown (0)'
-            case 'a01': return 'Plastic Type: PET - polyethylene terephthalate (1)'
-            case 'a02': return 'Plastic Type: PE-HD - high-density polyethylene (2)'
-            case 'a03': return 'Plastic Type: PVC - polyvinyl chloride (3)'
-            case 'a04': return 'Plastic Type: PE-LD - low-density polyethylene (4)'
-            case 'a05': return 'Plastic Type: PP - polypropylene (5)'
-            case 'a06': return 'Plastic Type: PS - polystyrene (6)'
-            case 'a07': return 'Plastic Type: Other (7)'
+        switch (cls.slice(-1)) {
+            case '0': return 'Plastic Type: Unknown (0)'
+            case '1': return 'Plastic Type: PET - polyethylene terephthalate (1)'
+            case '2': return 'Plastic Type: PE-HD - high-density polyethylene (2)'
+            case '3': return 'Plastic Type: PVC - polyvinyl chloride (3)'
+            case '4': return 'Plastic Type: PE-LD - low-density polyethylene (4)'
+            case '5': return 'Plastic Type: PP - polypropylene (5)'
+            case '6': return 'Plastic Type: PS - polystyrene (6)'
+            case '7': return 'Plastic Type: Other (7)'
             default: return 'Plastic Type: Unknown'
         }
     }
