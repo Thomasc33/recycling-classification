@@ -1,0 +1,39 @@
+.ProfileStatsBox {
+    position: absolute;
+    align-items: center;
+    top: 17.5vh;
+    left: 25vw;
+    background-color: rgba(35, 39, 42, 0.8);
+    width: 50vw;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 3000px rgba(40, 43, 48, 0.5);
+}
+
+.ProfileStatsBox li {
+    color: #99AAB5;
+    list-style: none;
+    text-align: center;
+}
+
+.ProfileStatsBox h1 {
+    color: #99AAB5;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 1.7rem;
+}
+
+.ProfileStatsBoxGroup h2 {
+    color: #99AAB5;
+    text-align: center;
+    padding-top: 10px;
+    font-size:1.4rem;
+}
+
+.ProfileStatsBoxGroup li {
+    font-size: 1rem;
+}
+
+.ProfileStatsBoxGroup:hover li {
+    font-size: 1.2rem;
+    color: #ffffff
+}

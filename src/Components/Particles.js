@@ -30,7 +30,7 @@ const particles = () => {
                             quantity: .1
                         },
                         grab: {
-                            distance: 150
+                            distance: 350
                         }
                     }
                 },
@@ -43,7 +43,7 @@ const particles = () => {
                     },
                     links: {
                         color: "#99AAB5",
-                        distance: 50,
+                        distance: 250,
                         enable: true,
                         opacity: .5,
                         width: 1

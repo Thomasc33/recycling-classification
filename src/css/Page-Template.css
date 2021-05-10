@@ -86,6 +86,11 @@
 .body {
   padding-bottom: 0px;
   scrollbar-width: none;
+  background-color: #2C2F33;
+}
+
+body {
+  background-color: #2C2F33;
 }
 
 .dropdown-content {
