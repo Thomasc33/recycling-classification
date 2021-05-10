@@ -62,6 +62,7 @@ function App() {
                     audio={false}
                     ref={webcamRef}
                     screenshotFormat="image/jpeg"
+                    style={{width:'100%', position:'relative'}}
                 />
             </div>
             {data ?
@@ -124,7 +125,7 @@ function niceLabels(cls, prob) {
         }
     }
     return (
-        <div style={{ background: `linear-gradient(90deg, ${'#8730d9'} 0%, ${blendColors('#8730d9', '#000000', .5)} ${(prob * 100).toFixed(5)}%, #000000 100%)`, margin: '7%', padding: '1rem', borderRadius: '3px' }}>
+        <div style={{ background: `linear-gradient(90deg, ${'#8730d9'} 0%, ${blendColors('#8730d9', '#000000', .5)} ${(prob * 100).toFixed(5)}%, #000000 100%)`, margin: '1%', padding: '1rem', borderRadius: '3px' }}>
             <p>{`Confidence: ${(prob * 100).toFixed(5)}%, ` + str}</p>
         </div>
     )

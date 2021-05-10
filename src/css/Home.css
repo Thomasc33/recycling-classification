@@ -1,7 +1,8 @@
 .Camera {
     position: absolute;
-    left: 10vw;
-    top: 15vh;
+    left: 10%;
+    width: 80%;
+    top: 4vh;
 }
 
 .Camera * {
@@ -27,7 +28,6 @@
     left: 10%;
     bottom: 5px;
     width: 80%;
-    height: 40%;
     float: left;
     border-radius: 5px;
     overflow-y: scroll;
