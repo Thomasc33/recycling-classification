@@ -1,7 +1,7 @@
 import React from 'react'
 import Particles from 'react-tsparticles'
 
-export default () => {
+const particles = () => {
     return (
         <Particles
             width='100vw'
@@ -59,3 +59,5 @@ export default () => {
         />
     )
 }
+
+export default particles
