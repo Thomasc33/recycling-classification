@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { isMobile } from "react-device-detect";
 import PageTemplate from './Template'
 import Webcam from 'react-webcam'
 import axios from 'axios'
@@ -62,8 +63,8 @@ function App() {
                     audio={false}
                     ref={webcamRef}
                     screenshotFormat="image/jpeg"
-                    videoConstraints={videoConstraints}
-                    style={{width:'100%', position:'relative'}}
+                    videoConstraints={(isMobile) ? { videoConstraints } : undefined}
+                    style={{ width: '100%', position: 'relative' }}
                 />
             </div>
             {data ?
@@ -134,7 +135,7 @@ function niceLabels(cls, prob) {
 
 const videoConstraints = {
     facingMode: { exact: "environment" }
-  };
+};
 
 function b64toBlob(b64Data, contentType, sliceSize) {
     contentType = contentType || '';
