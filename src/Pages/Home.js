@@ -24,7 +24,6 @@ function App() {
 
             //Model selection
             let choice = document.getElementById('model')
-            console.log(choice.value)
             formData.append('model', choice.value)
 
             //Post
@@ -36,14 +35,12 @@ function App() {
                     'Access-Control-Allow-Origin': '*'
                 },
                 data: formData
-            }).catch(er => {
-                console.log('error: ', er)
-            })
+            }).catch(er => { })
 
             //return data
             if (!response || !response.data) return setTimeout(callPost, 1000)
             const data = response.data
-            console.log(data)
+            console.log(JSON.stringify(data))
             setData(data);
             setTimeout(callPost, 1000)
         }
@@ -52,13 +49,15 @@ function App() {
     }, [])
     return (
         <>
-            <label>Choose a model: </label>
-            <select className='modelSelect' id='model'>
-                <option value='wadaba'>WaDaBA</option>
-                <option value='duckduckgo'>DuckDuckGo</option>
-            </select>
             <PageTemplate highLight="0" />
             <div className='Camera'>
+                <div>
+                    <label>Choose a model: </label>
+                    <select id='model'>
+                        <option value='duckduckgo'>DuckDuckGo</option>
+                        <option value='wadaba'>WaDaBA</option>
+                    </select>
+                </div>
                 <Webcam
                     audio={false}
                     ref={webcamRef}
@@ -76,7 +75,7 @@ function App() {
 export default App;
 
 function niceLabels(cls) {
-    if(cls.length > 3) return cls
+    if (cls.length > 3) return `Similar To: ${toTitleCase(cls.replace('_', ' '))}`
     if (cls.charAt(0) === 'a') {
         switch (cls.slice(-1)) {
             case '0': return 'Plastic Type: Unknown (0)'
@@ -139,4 +138,10 @@ function b64toBlob(b64Data, contentType, sliceSize) {
 
     var blob = new Blob(byteArrays, { type: contentType });
     return blob;
+}
+
+function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
 }
