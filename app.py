@@ -24,16 +24,19 @@ learn_duck = load_learner('duck.pkl')
 def predict_single(img_file, learn):
     'function to take image and return prediction'
     pred, pred_idx, probs = learn.predict(PILImage.create(img_file))
+    probabilities = list(probs[pred_idx])
     return {
-        'categories': [str(x) for x in pred]#,
-        #'probs': {c: round(float(probs[i]), 5) for (i, c) in enumerate(classes)}
+        'categories': dict(zip([str(x) for x in pred], list(float(x) for x in probs[pred_idx])))
     }
+    #return {
+    #    'categories': [str(x) for x in pred],
+    #    'probs': list(float(x) for x in probs[pred_idx])
+    #}
 
 # route for prediction
 @app.route('/predict', methods=['POST'])
 @cross_origin()
 def predict():
-    print(request.form, request.args)
     selected_model = request.form.get('model','wadaba')
     if selected_model == 'wadaba':
         return jsonify(predict_single(request.files['image'], learn_wadaba))  
