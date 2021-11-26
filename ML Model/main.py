@@ -7,7 +7,7 @@ import pathlib
 temp = pathlib.PosixPath
 pathlib.PosixPath = pathlib.PurePosixPath
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/predict": {"origins": "*"}})
 
 pattern = re.compile(r'\d{4}_(a\d\d)b\d\dc\d(d\d)(e\d)(f\d)g\dh\d\.jpg')
 def get_y(x):
@@ -37,7 +37,7 @@ def predict_single(img_file, learn):
 
 # route for prediction
 @app.route('/predict', methods=['POST'])
-@cross_origin()
+@cross_origin(origin='*')
 def predict():
     selected_model = request.form.get('model','wadaba')
     if selected_model == 'wadaba':
@@ -48,5 +48,9 @@ def predict():
         return jsonify(predict_single(request.files['image'], learn_duck))
     return "model not found", 400
 
+@app.route('/')
+def home():
+    return 'OK', 200
+
 if __name__ == '__main__':
-    app.run(host= '192.168.254.76', port=9000, debug=True, ssl_context=('cert.pem', 'key.pem'))
+    app.run(host='127.0.0.1', port=8080, debug=True)

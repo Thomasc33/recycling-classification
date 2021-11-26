@@ -30,7 +30,7 @@ function App() {
             //Post
             const response = await axios({
                 method: 'post',
-                url: 'https://mc.bluebounty.tech:9000/predict',
+                url: 'https://recycling-classification-6db68.ue.r.appspot.com/predict',
                 mode: 'cors',
                 headers: {
                     'Access-Control-Allow-Origin': '*'
@@ -65,7 +65,7 @@ function App() {
                     ref={webcamRef}
                     screenshotFormat="image/jpeg"
                     videoConstraints={(isMobile) ? { videoConstraints } : undefined}
-                    style={{ width: '100%', position: 'relative' }}
+                    style={{ maxHeight: '85vh', maxWidth: '85vw', position: 'relative' }}
                 />
             </div>
             {data ?

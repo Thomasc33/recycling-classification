@@ -1,6 +1,4 @@
 Flask
-gunicorn
 fastai
-torch
 flask_cors
-pathlib
+pathlib2
